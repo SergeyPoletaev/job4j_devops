@@ -8,11 +8,10 @@ class CalcApplicationTests {
 
     @Test
     void contextLoads() {
-        // This test ensures that the Spring application context loads successfully
     }
 
     @Test
     void mainMethodTest() {
-        CalcApplication.main(new String[] {});
+        CalcApplication.main(new String[]{});
     }
 }
