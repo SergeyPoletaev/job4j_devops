@@ -58,3 +58,15 @@ checkstyle {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+tasks.register<Zip>("zipJavaDoc") {
+    group = "documentation"
+    description = "Упаковывает сгенерированный Javadoc в zip-архив."
+
+    dependsOn(tasks.javadoc)
+
+    from("build/docs/javadoc")
+    archiveFileName.set("javadoc.zip") // Имя создаваемого архива
+    destinationDirectory.set(layout.buildDirectory.dir("archives"))
+}
+

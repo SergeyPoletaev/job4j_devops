@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Дто результата вычисления
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
