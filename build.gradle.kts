@@ -4,6 +4,7 @@ plugins {
 	jacoco
 	id("org.springframework.boot") version "3.4.0"
 	id("io.spring.dependency-management") version "1.1.6"
+    id("com.github.spotbugs") version "6.0.26"
 }
 
 group = "ru.job4j.devops"
@@ -57,6 +58,8 @@ checkstyle {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+    finalizedBy(tasks.spotbugsMain)
 }
 
 tasks.register<Zip>("zipJavaDoc") {
@@ -66,7 +69,7 @@ tasks.register<Zip>("zipJavaDoc") {
     dependsOn(tasks.javadoc)
 
     from("build/docs/javadoc")
-    archiveFileName.set("javadoc.zip") // Имя создаваемого архива
+    archiveFileName.set("javadoc.zip")
     destinationDirectory.set(layout.buildDirectory.dir("archives"))
 }
 
@@ -91,4 +94,11 @@ tasks.register("checkJarSize") {
     }
 }
 
+
+tasks.spotbugsMain {
+    reports.create("html") {
+        required = true
+        outputLocation.set(layout.buildDirectory.file("reports/spotbugs/spotbugs.html"))
+    }
+}
 
