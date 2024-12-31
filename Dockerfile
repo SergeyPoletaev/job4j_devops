@@ -1,24 +1,7 @@
 FROM gradle:8.11.1-jdk21 as builder
 
-ARG GRADLE_REMOTE_CACHE_URL
-ARG GRADLE_REMOTE_CACHE_PUSH
-ARG GRADLE_REMOTE_CACHE_USERNAME
-ARG GRADLE_REMOTE_CACHE_PASSWORD
-
-ENV GRADLE_REMOTE_CACHE_URL=$GRADLE_REMOTE_CACHE_URL \
-    GRADLE_REMOTE_CACHE_PUSH=$GRADLE_REMOTE_CACHE_PUSH \
-    GRADLE_REMOTE_CACHE_USERNAME=$GRADLE_REMOTE_CACHE_USERNAME \
-    GRADLE_REMOTE_CACHE_PASSWORD=$GRADLE_REMOTE_CACHE_PASSWORD
-
 WORKDIR /job4j_devops
-
-COPY build.gradle.kts settings.gradle.kts gradle.properties .
-RUN mkdir -p gradle
-COPY ./gradle/libs.versions.toml ./gradle
-RUN gradle --no-daemon dependencies
-
 COPY . .
-RUN gradle --no-daemon build -x test
 RUN jar xf /job4j_devops/build/libs/DevOps-1.0.0.jar
 
 RUN jdeps --ignore-missing-deps -q \

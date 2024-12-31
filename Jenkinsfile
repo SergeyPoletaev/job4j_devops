@@ -1,5 +1,11 @@
 pipeline {
-    agent { label 'agent1' }
+    agent {
+        label 'jdk21 && linux'
+    }
+
+    tools {
+        git 'Default'
+    }
 
     stages {
         stage('Prepare Environment') {
@@ -9,31 +15,17 @@ pipeline {
                 }
             }
         }
-        stage('Checkstyle Main') {
+        stage('Check') {
             steps {
                 script {
-                    sh './gradlew checkstyleMain'
+                    sh './gradlew check'
                 }
             }
         }
-        stage('Checkstyle Test') {
+        stage('Package') {
             steps {
                 script {
-                    sh './gradlew checkstyleTest'
-                }
-            }
-        }
-        stage('Compile') {
-            steps {
-                script {
-                    sh './gradlew compileJava'
-                }
-            }
-        }
-        stage('Test') {
-            steps {
-                script {
-                    sh './gradlew test'
+                    sh './gradlew build'
                 }
             }
         }
@@ -48,6 +40,13 @@ pipeline {
             steps {
                 script {
                     sh './gradlew jacocoTestCoverageVerification'
+                }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                script {
+                    sh 'docker build -t job4j_devops .'
                 }
             }
         }
