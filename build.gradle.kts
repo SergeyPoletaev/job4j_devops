@@ -84,7 +84,7 @@ liquibase {
 }
 
 checkstyle {
-    configFile = file("checkstyle.xml")
+    configFile = file("$rootDir/config/checkstyle/checkstyle.xml")
 }
 
 tasks.withType<Test> {
