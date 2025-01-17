@@ -50,6 +50,13 @@ pipeline {
                 }
             }
         }
+        stage('Update DB') {
+            steps {
+                script {
+                    sh './gradlew update -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
+                }
+            }
+        }
     }
 
     post {
