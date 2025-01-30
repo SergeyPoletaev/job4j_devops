@@ -21,3 +21,11 @@ if (System.getenv(cacheUrl) != null) {
         }
     }
 }
+
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
