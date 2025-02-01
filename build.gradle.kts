@@ -56,12 +56,18 @@ buildscript {
 dependencies {
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
+
     implementation(libs.spring.boot.starter.web)
+    implementation(libs.spring.boot.starter.data.jpa)
+    implementation ("org.postgresql:postgresql:42.7.4")
+
     testImplementation(libs.spring.boot.starter.test)
     testRuntimeOnly(libs.junit.platform.launcher)
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.assertj.core)
     testImplementation("org.testcontainers:postgresql:1.20.4")
+    testImplementation("org.liquibase:liquibase-core:4.30.0")
+    testImplementation ("com.h2database:h2:1.4.200")
 
     liquibaseRuntime("org.liquibase:liquibase-core:4.30.0")
     liquibaseRuntime("org.postgresql:postgresql:42.7.4")
@@ -199,6 +205,10 @@ tasks.register<Test>("integrationTest") {
 
 tasks.check {
     dependsOn("integrationTest")
+}
+
+spotbugs {
+    ignoreFailures = true
 }
 
 

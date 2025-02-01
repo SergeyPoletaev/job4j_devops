@@ -9,4 +9,5 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jun
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj-core" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
