@@ -20,7 +20,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Step 8: Copy the built JAR from the builder stage to the runtime container
-COPY --from=builder /app/build/libs/*.jar app.jar
+COPY --from=builder /app/build/libs/DevOps-1.0.0.jar app.jar
 
 # Step 9: Expose the application port (replace 8080 with your app's port if different)
 EXPOSE 8080
