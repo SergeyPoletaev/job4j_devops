@@ -3,6 +3,7 @@ package ru.job4j.devops.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import ru.job4j.devops.config.ContainersConfig;
 import ru.job4j.devops.enums.Operation;
 import ru.job4j.devops.models.CalcEvent;
@@ -16,6 +17,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.awaitility.Awaitility.await;
 
+@ActiveProfiles("kafka")
 public class CalcEventListenerTest extends ContainersConfig {
     @Autowired
     private UserRepository userRepository;

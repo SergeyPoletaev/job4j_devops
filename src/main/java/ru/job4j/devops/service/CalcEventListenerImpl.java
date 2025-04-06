@@ -2,11 +2,13 @@ package ru.job4j.devops.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import ru.job4j.devops.models.CalcEvent;
 import ru.job4j.devops.repository.CalcEventRepository;
 
+@Profile("kafka")
 @Slf4j
 @Service
 @RequiredArgsConstructor
