@@ -18,7 +18,28 @@ java {
     }
 }
 
+tasks.register<JacocoReport>("jacocoMergedReport") {
+    group = "verification"
+    description = "Генерирует единый отчет о покрытии Jacoco из интеграционных и модульных тестов"
+
+    dependsOn("jacocoTestReport", "integrationTest")
+
+    additionalSourceDirs.from(files(sourceSets.main.get().allSource.srcDirs))
+    sourceDirectories.from(files(sourceSets.main.get().allSource.srcDirs))
+    classDirectories.from(files(sourceSets.main.get().output))
+
+    executionData.from(fileTree(layout.buildDirectory).include("**/jacoco/*.exec"))
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+
 tasks.jacocoTestCoverageVerification {
+    dependsOn("jacocoMergedReport")
+    executionData.from(fileTree(layout.buildDirectory).include("**/jacoco/*.exec"))
+
     violationRules {
         rule {
             limit {
